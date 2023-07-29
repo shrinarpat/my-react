@@ -1,1 +1,18 @@
-React Leaning
+# React Leaning
+
+# Parcel
+- Dev build
+- Creating server
+- HMR - Hot module replacement
+- File watching algorithm - written in C++
+- Caching - Faster build
+- Image optimization
+- Minification our file
+- Bundling
+- Compression
+- Consistent Hashing
+- Code splitting
+- Differential Bundling - support older browser
+- Daignostic
+- Better error handling
+- Tree Shaking - remove unused code
