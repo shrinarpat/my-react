@@ -16,3 +16,20 @@
 - Daignostic
 - Better error handling
 - Tree Shaking - remove unused code
+
+
+/* 
+! Food Ordering App Basic Design
+* 1) Heading Component
+*     - Logo
+*     - Navigation
+* 2) Body
+*     - Search functionality
+*     - RestaurantContainer
+*         - RestaurantCards
+* 3) Footer
+*     - Copyright 
+*     - Link
+*     - Address
+*     - Contact
+*/
