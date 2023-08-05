@@ -1,13 +1,15 @@
 import { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 
 import RestaurantCard from "./RestaurantCard";
 import Shimmer from "./Shimmer";
 import { SWIGGY_API_URL } from "../utils/constants";
+import useOnlineStatus from "../utils/useOnlineStatus";
+import useRestaurant from "../utils/useRestaurant";
 
 const Body = () => {
-  const [initialReslist, setInitialResList] = useState([]);
-  const [resList, setReslist] = useState([]);
-  const [searchTerm, setSearchTerm] = useState("");
+  const [initialReslist, resList, setReslist] = useRestaurant([]);
+  const onlineStatus = useOnlineStatus();
 
   const topRatedRestaurants = () => {
     const filteredRes = resList.filter((res) => res.info.avgRating > 4);
@@ -18,22 +20,21 @@ const Body = () => {
     setReslist(initialReslist);
   };
 
-  useEffect(() => {
-    fetchData();
-  }, []);
+  const searchRes = (e) => {
+    e.preventDefault();
 
-  const fetchData = async () => {
-    const apiData = await fetch(SWIGGY_API_URL);
-    const jsonData = await apiData.json();
-    setInitialResList(
-      jsonData.data?.cards[5]?.card?.card?.gridElements?.infoWithStyle
-        ?.restaurants
+    const searchResult = initialReslist.filter((res) =>
+      res.info.name.toLowerCase().includes(e.target[0].value.toLowerCase())
     );
-    setReslist(
-      jsonData.data?.cards[5]?.card?.card?.gridElements?.infoWithStyle
-        ?.restaurants
-    );
+
+    setReslist(searchResult);
   };
+
+  if (!onlineStatus) {
+    return (
+      <h1>Oops... Looks like you're offline - Please check your internet</h1>
+    );
+  }
 
   const loadSimmerUI = () => {
     let i = 0;
@@ -43,51 +44,53 @@ const Body = () => {
       i++;
     }
 
-    return (
-      <div className="restaurant-cards-container">{shimmerComponentList};</div>
-    );
-  };
-
-  const searchRes = (e) => {
-    e.preventDefault();
-
-    console.log(e.target[0].value.toLowerCase());
-
-    const searchResult = initialReslist.filter((res) =>
-      res.info.name.toLowerCase().includes(e.target[0].value.toLowerCase())
-    );
-
-    setReslist(searchResult);
+    return <div className="flex flex-wrap">{shimmerComponentList};</div>;
   };
 
   return resList?.length === 0 ? (
     loadSimmerUI()
   ) : (
-    <div className="body">
-      <div className="search-container">
+    <div>
+      <div className="flex flex-col md:flex-row justify-start ml-4 py-4">
         <form onSubmit={($e) => searchRes($e)}>
           <input
             type="text"
             name="search"
             placeholder="Restaurant..."
             id="search-term"
-            className="search-input"
+            className="p-2 mr-2 border border-gray rounded-lg"
           />
-          <button type="submit" id="search-button" className="search-btn">
+          <button
+            type="submit"
+            id="search-button"
+            className="bg-blue-300 px-4 py-2 mr-4 border rounded-lg"
+          >
             Search
           </button>
         </form>
 
-        <button className="filter-btn" onClick={topRatedRestaurants}>
+        <button
+          className="bg-gray-300 px-4 py-2 mr-2 border rounded-lg"
+          onClick={topRatedRestaurants}
+        >
           Top Rated Restaurants
         </button>
-        <button className="filter-btn" onClick={allRestaurants}>
+        <button
+          className="bg-gray-300 px-4 py-2 mr-2 border rounded-lg"
+          onClick={allRestaurants}
+        >
           All Restaurants
         </button>
       </div>
-      <div className="restaurant-cards-container">
+      <div className="flex flex-wrap">
         {resList.map((res) => (
-          <RestaurantCard key={res?.info.id} restaurant={res} />
+          <Link
+            key={res?.info?.id}
+            to={"/restaurants/" + res?.info?.id}
+            className="md:w-[48%] lg:w-[24%] border rounded-md p-2 bg-gray-100 m-1"
+          >
+            <RestaurantCard restaurant={res} />
+          </Link>
         ))}
       </div>
     </div>

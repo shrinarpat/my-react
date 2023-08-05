@@ -1,6 +1,13 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 * {
   box-sizing: border-box;
 }
+
+/* 
+
 .header {
   display: flex;
   width: 100%;
@@ -22,6 +29,7 @@
 .navigation > .nav {
   list-style-type: none;
   display: flex;
+  flex-wrap: wrap;
   flex-direction: row;
   justify-content: space-around;
   align-items: center;
@@ -91,13 +99,13 @@
 
 .card {
   width: 200px;
+  height: 400px;
   box-shadow: 2px 2px 20px #e0e0e0;
   padding: 10px;
   margin: 5px;
 }
 
 .card:hover {
-  /* border: 1px solid #f0f0f0; */
   box-shadow: 5px 5px 20px gray;
   cursor: pointer;
 }
@@ -121,3 +129,72 @@
   padding: 0px 10px;
   font-size: 13px;
 }
+
+.restro-link {
+  text-decoration: none;
+  color: #000;
+}
+
+.contact-section > h2 {
+  text-align: center;
+  margin: 24px 0px;
+}
+
+.contact-section {
+  width: 60%;
+  margin: 50px auto;
+}
+
+.contact-section label {
+  font-size: 1em;
+  font-weight: bold;
+  margin-bottom: 10px;
+  display: block;
+}
+
+.contact-section input,
+.contact-section textarea {
+  display: block;
+  width: 100%;
+  padding: 10px 12px;
+  border: 2px solid #f0f0f0;
+  border-radius: 10px;
+  height: 50px;
+  margin-bottom: 15px;
+}
+
+.contact-section input[type="submit"] {
+  cursor: pointer;
+  background-color: green;
+  color: white;
+}
+
+.restaurant-menu {
+  width: 80%;
+  margin: auto;
+}
+
+.menu-list {
+  list-style-type: none;
+  padding: 0px;
+}
+
+.menu-card,
+.user-card {
+  box-shadow: 2px 2px 20px #a0a0e0;
+  padding: 15px;
+  margin: 5px;
+  background-color: #e0e0e0;
+}
+
+.menu-card:hover {
+  box-shadow: 5px 5px 20px gray;
+  cursor: pointer;
+}
+
+p > span {
+  padding: 10px;
+  margin: 10px;
+  border: 1px solid black;
+  cursor: pointer;
+} */

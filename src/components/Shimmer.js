@@ -4,7 +4,7 @@ import {
 } from "../utils/constants";
 const Shimmer = () => {
   return (
-    <div className="card">
+    <div className="md:w-[48%] lg:w-[24%] border rounded-md p-2 bg-gray-100 m-1">
       <img
         src={PLACEHOLD_BASE_URL + "400?text=img"}
         className="res-img"

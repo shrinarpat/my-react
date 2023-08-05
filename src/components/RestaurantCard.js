@@ -5,13 +5,13 @@ const RestaurantCard = (props) => {
     props?.restaurant?.info;
 
   return (
-    <div className="card">
+    <div className="">
       <img
         src={SWIGGY_CLOUD_IMG_BASE_PATH + cloudinaryImageId}
         alt="card-img"
-        className="res-img"
+        className=" rounded-md"
       />
-      <h4>{name}</h4>
+      <h4 className="text-lg font-bold py-2">{name}</h4>
       <p>{cuisines.join(", ")}</p>
       <p>{avgRating ?? 0} stars</p>
       <p>{sla?.deliveryTime} Mins</p>
