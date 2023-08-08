@@ -22,7 +22,7 @@ const RestaurantMenu = () => {
     );
 
   return (
-    <div className="text-center mt-4 w-2/3 mx-auto">
+    <div className="text-center mt-4  mx-auto">
       <div className="brand p-4 text-md shadow-sm">
         <h2 className="font-bold text-lg my-4">{name}</h2>
         <p className="font-semibold my-4"> {cuisines.join(", ")}</p>
