@@ -1,4 +1,5 @@
 import React from "react";
+import UserContext from "../utils/UserContext";
 class UserClass extends React.Component {
   constructor(props) {
     super(props);
@@ -9,11 +10,11 @@ class UserClass extends React.Component {
       },
     };
 
-    console.log("Child Constructor");
+    // console.log("Child Constructor");
   }
 
   async componentDidMount() {
-    console.log("Child ComponentDidMount");
+    // console.log("Child ComponentDidMount");
 
     //* API
     const data = await fetch("https://api.github.com/users/shrinarpat");
@@ -29,11 +30,11 @@ class UserClass extends React.Component {
   }
 
   componentDidUpdate() {
-    console.log("Child ComponentDidUpdate");
+    // console.log("Child ComponentDidUpdate");
   }
 
   componentWillUnmount() {
-    console.log("Child ComponentWillUnmount");
+    // console.log("Child ComponentWillUnmount");
     // clearInterval(this.interval);
   }
 
@@ -46,6 +47,11 @@ class UserClass extends React.Component {
         <h3 className="font-bold text-md">Location: {location}</h3>
         <h4 className="font-bold">Contact: narpatsingh90918@gmail.com</h4>
         <p className="font-semibold"> Bio: {bio}</p>
+        <div>
+          <UserContext.Consumer>
+            {(data) => console.log(data)}
+          </UserContext.Consumer>
+        </div>
       </div>
     );
   }

@@ -1,15 +1,15 @@
-import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 
-import RestaurantCard from "./RestaurantCard";
+import RestaurantCard, { withOfferLabel } from "./RestaurantCard";
 import Shimmer from "./Shimmer";
-import { SWIGGY_API_URL } from "../utils/constants";
 import useOnlineStatus from "../utils/useOnlineStatus";
 import useRestaurant from "../utils/useRestaurant";
 
 const Body = () => {
   const [initialReslist, resList, setReslist] = useRestaurant([]);
   const onlineStatus = useOnlineStatus();
+
+  const RestaurantCardOffer = withOfferLabel(RestaurantCard);
 
   const topRatedRestaurants = () => {
     const filteredRes = resList.filter((res) => res.info.avgRating > 4);
@@ -51,7 +51,7 @@ const Body = () => {
     loadSimmerUI()
   ) : (
     <div>
-      <div className="flex flex-col md:flex-row justify-start ml-4 py-4">
+      <div className="flex flex-col md:flex-row justify-start ml-4 mt-4 py-4">
         <form onSubmit={($e) => searchRes($e)}>
           <input
             type="text"
@@ -70,13 +70,13 @@ const Body = () => {
         </form>
 
         <button
-          className="bg-gray-300 px-4 py-2 mr-2 border rounded-lg"
+          className="bg-green-300 px-4 py-2 mr-2 border rounded-lg"
           onClick={topRatedRestaurants}
         >
           Top Rated Restaurants
         </button>
         <button
-          className="bg-gray-300 px-4 py-2 mr-2 border rounded-lg"
+          className="bg-green-300 px-4 py-2 mr-2 border rounded-lg"
           onClick={allRestaurants}
         >
           All Restaurants
@@ -87,9 +87,15 @@ const Body = () => {
           <Link
             key={res?.info?.id}
             to={"/restaurants/" + res?.info?.id}
-            className="md:w-[48%] lg:w-[24%] border rounded-md p-2 bg-gray-100 m-1"
+            className="md:w-6/12 lg:w-3/12"
           >
-            <RestaurantCard restaurant={res} />
+            {res.info &&
+            res.info.aggregatedDiscountInfoV3 &&
+            res.info.aggregatedDiscountInfoV3.header ? (
+              <RestaurantCardOffer restaurant={res} />
+            ) : (
+              <RestaurantCard restaurant={res} />
+            )}
           </Link>
         ))}
       </div>

@@ -1,14 +1,18 @@
 import { useNavigate } from "react-router-dom";
+import UserContext from "../utils/UserContext";
+import { useContext } from "react";
 import { Formik } from "formik";
 
 const Login = () => {
   const navigate = useNavigate();
   const handleNavigation = () => navigate("/");
+  const { loggedInUser, setUserName } = useContext(UserContext);
+
   return (
     <div className="login flex justify-center flex-col items-center py-12">
       <h1 className="font-bold text-2xl mb-8">Formik Login Form</h1>
       <Formik
-        initialValues={{ email: "", password: "" }}
+        initialValues={{ username: "", email: "", password: "" }}
         validate={(values) => {
           const errors = {};
           if (!values.email) {
@@ -23,6 +27,8 @@ const Login = () => {
         onSubmit={(values, { setSubmitting }) => {
           setTimeout(() => {
             alert(JSON.stringify(values, null, 2));
+            console.log(values.username);
+            setUserName(values.username);
             setSubmitting(false);
             handleNavigation();
           }, 400);
@@ -41,6 +47,13 @@ const Login = () => {
             onSubmit={handleSubmit}
             className="flex flex-col w-[80%] mx-auto"
           >
+            <input
+              type="text"
+              name="username"
+              value={values.username}
+              onChange={handleChange}
+              className="border border-gray-200 px-4 py-2 m-4 rounded-md"
+            />
             <input
               type="email"
               name="email"
