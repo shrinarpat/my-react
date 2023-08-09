@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import groceryData from "../utils/groceryMockData";
+import groceryData from "../data/groceryMockData";
 import GroceryCard from "./GroceryCard";
 
 const Grocery = () => {

@@ -31,6 +31,7 @@ const FoodCategory = ({ data, showItems, setOpenAccordianIndex }) => {
             <div
               className="my-4 py-2 flex border-b-2 border-gray-200"
               key={item?.card?.info?.id}
+              data-testid="foodItems"
             >
               <div className="w-9/12">
                 <h4 className="font-bold text-md my-1">

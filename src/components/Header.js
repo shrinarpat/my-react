@@ -12,11 +12,12 @@ const Header = () => {
 
   return (
     <div className="flex flex-col sm:flex-row justify-between sm:items-center  bg-orange-200 rounded-lg pr-4">
-      <div className="logo-container">
+      <div className="logo-container flex items-center">
         <Link to="/">
           {" "}
           <img src={LOGO_URL} alt="company logo" className="w-24 h-16" />
         </Link>
+        <span className="font-semibold text-md p-2 m-2"> {loggedInUser}</span>
       </div>
       <div className="navigation mr-8">
         <ul className="nav flex flex-col sm:flex-row ">
@@ -47,7 +48,7 @@ const Header = () => {
           </li>
           <li className="m-2">
             <Link to="/login" className="p-4 font-bold">
-              {loggedInUser}
+              Login
             </Link>
           </li>
         </ul>

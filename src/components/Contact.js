@@ -13,7 +13,7 @@ const Contact = () => {
             type="text"
             id="name"
             name="username"
-            placeholder="Your name... "
+            placeholder="name"
             className="border border-gray-200 p-2 rounded-md"
             required
           />

@@ -52,12 +52,13 @@ const Body = () => {
   ) : (
     <div>
       <div className="flex flex-col md:flex-row justify-start ml-4 mt-4 py-4">
-        <form onSubmit={($e) => searchRes($e)}>
+        <form onSubmit={($e) => searchRes($e)} data-testid="searchForm">
           <input
             type="text"
             name="search"
             placeholder="Restaurant..."
             id="search-term"
+            data-testid="searchInput"
             className="p-2 mr-2 border border-gray rounded-lg"
           />
           <button
@@ -72,6 +73,7 @@ const Body = () => {
         <button
           className="bg-green-300 px-4 py-2 mr-2 border rounded-lg"
           onClick={topRatedRestaurants}
+          data-testid="topRatedBtn"
         >
           Top Rated Restaurants
         </button>
@@ -85,9 +87,10 @@ const Body = () => {
       <div className="flex flex-wrap">
         {resList.map((res) => (
           <Link
-            key={res?.info?.id}
+            data-testid="resCard"
             to={"/restaurants/" + res?.info?.id}
             className="md:w-6/12 lg:w-3/12"
+            key={res?.info?.id}
           >
             {res.info &&
             res.info.aggregatedDiscountInfoV3 &&
