@@ -45,7 +45,7 @@ const Login = () => {
         }) => (
           <form
             onSubmit={handleSubmit}
-            className="flex flex-col w-[80%] mx-auto"
+            className="flex flex-col w-[60%] mx-auto"
           >
             <input
               type="text"
