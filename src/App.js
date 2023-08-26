@@ -20,17 +20,18 @@ const Grocery = lazy(() => import("./components/Grocery"));
 const About = lazy(() => import("./components/About"));
 
 const AppLayout = () => {
-  const [userName, setUserName] = useState();
+  const [userName, setUserName] = useState("");
 
-  useEffect(() => {
-    // suppose I have an api call here which returns username
+  // useEffect(() => {
+  //   // suppose I have an api call here which returns username
 
-    data = {
-      userName: "Narpat Singh",
-    };
+  //   const data = {
+  //     userName: "Narpat Singh",
+  //   };
 
-    setUserName(data.userName);
-  }, []);
+  //   setUserName(data.userName);
+  // }, []);
+
   return (
     <Provider store={appStore}>
       <UserContext.Provider value={{ loggedInUser: userName, setUserName }}>
