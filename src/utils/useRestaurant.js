@@ -10,25 +10,29 @@ const useRestaurant = (initialState = []) => {
   }, []);
 
   const fetchData = async () => {
-    const data = await fetch(SWIGGY_API_URL);
-    const json = await data.json();
+    try {
+      const data = await fetch(SWIGGY_API_URL, { dataType: "jsonp" });
+      const json = await data.json();
 
-    let resData = null;
-    let i,
-      length = json?.data?.cards.length;
+      let resData = null;
+      let i,
+        length = json?.data?.cards.length;
 
-    for (i = 0; i < length; i++) {
-      if (resData === null || resData === undefined) {
-        resData =
-          json?.data?.cards[i]?.card?.card?.gridElements?.infoWithStyle
-            ?.restaurants;
-      } else {
-        break;
+      for (i = 0; i < length; i++) {
+        if (resData === null || resData === undefined) {
+          resData =
+            json?.data?.cards[i]?.card?.card?.gridElements?.infoWithStyle
+              ?.restaurants;
+        } else {
+          break;
+        }
       }
-    }
 
-    setResList(resData);
-    setInitialResList(resData);
+      setResList(resData);
+      setInitialResList(resData);
+    } catch (err) {
+      console.log("Error: ", err);
+    }
   };
 
   // return restaurants list
